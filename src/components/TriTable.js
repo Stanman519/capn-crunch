@@ -7,7 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import './TriTable.scss';
+import '../styles/TriTable.scss';
 
 class TriTable extends React.Component {
     state = {
@@ -77,7 +77,7 @@ class TriTable extends React.Component {
                                 <TableCell class="vertical tritable-text">{row.h2hWins1 * 5 + row.pointsFor1}</TableCell>
                                 <TableCell class="tritable-text">{row.h2hWins2 ?? 0}</TableCell>
                                 <TableCell class="tritable-text">{row.pointsFor2 ?? 0}</TableCell>
-                                <TableCell class="vertical">{row.h2hWins2 * 5 + row.pointsFor2}</TableCell>
+                                <TableCell class="vertical tritable-text">{row.h2hWins2 * 5 + row.pointsFor2}</TableCell>
                                 <TableCell class="tritable-text">{row.h2hWins3 ?? 0}</TableCell>
                                 <TableCell class="tritable-text">{row.pointsFor3 ?? 0}</TableCell>
                                 <TableCell class="tritable-text">{row.h2hWins3 * 5 + row.pointsFor3}</TableCell>

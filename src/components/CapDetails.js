@@ -7,7 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import './CapDetails.css';
+import '../styles/CapDetails.css';
 
 class CapDetails extends React.Component {
     constructor(props){
@@ -49,6 +49,7 @@ class CapDetails extends React.Component {
             t => t.franchiseId == this.props.selectedTeam.franchiseId && 
             (t.yearOfTransaction + t.years) > 2024)
     }
+    
 
     render() {
         return (

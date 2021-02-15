@@ -8,7 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import stickyHeader from'@material-ui/data-grid';
-import './DeadCapTable.scss';
+import '../styles/DeadCapTable.scss';
 import { makeStyles } from "@material-ui/core/styles";
 //import Table from 'react-bootstrap/Table';
 
