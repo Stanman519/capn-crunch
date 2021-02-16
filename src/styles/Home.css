@@ -15,12 +15,13 @@
   height: 110%;
 }
 .dead-cap-table{
-  height: 50vh;
+  height: 55vh;
 }
 .right-side{
   margin-top: 40px;
   margin-right: 40px;
   width: 35%;
+  height: 60vh;
 }
 .nav-button{
   color: #AFBDD1;
@@ -29,4 +30,7 @@
   background-color:#420E97;
   margin-top: 10px;
   padding: 2px 10px;
+}
+.tri-table{
+  height: 40vh;
 }
