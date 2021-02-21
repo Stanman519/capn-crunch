@@ -8,6 +8,7 @@ import Home from "./components/Home.js";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import ImpendingFreeAgents from "./components/ImpendingFreeAgents";
 
+
 export default function App() {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -36,7 +37,7 @@ export default function App() {
           <MenuItem onClick={handleClose}><a href="https://www64.myfantasyleague.com/2020/home/13894">MFL League Site</a></MenuItem>
           <MenuItem onClick={handleClose}><a href="https://stanfan.herokuapp.com/">Free Agency Auction</a></MenuItem>
           <MenuItem onClick={handleClose}><a href="https://docs.google.com/document/d/1HwSDgwT0H-YcRJB2-SfSQ1MdvDogVJ691xxcmhmeWD0/edit">League Rules</a></MenuItem>
-          <MenuItem onCLick={handleClose}><Link to="/free-agents">Expiring Contracts</Link></MenuItem>
+          <MenuItem onClick={handleClose}><Link to="/free-agents">Expiring Contracts</Link></MenuItem>
         </Menu>
       </div>
       <Route path="/" exact component={HomeView} />
