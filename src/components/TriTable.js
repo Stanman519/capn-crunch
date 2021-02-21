@@ -8,25 +8,31 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import '../styles/TriTable.scss';
+import PropTypes from 'prop-types';
 
 class TriTable extends React.Component {
     state = {
-        standings: []
-    } 
+        standings: [],
+        ownerList: [],
 
+    } 
+    // componentWillUnmount() {
+    //     // fix Warning: Can't perform a React state update on an unmounted component
+    //     this.setState = (state,callback)=>{
+    //         return;
+    //     };
+    // }
 
     componentDidMount() {
         axios.get(`https://mfl-capn.herokuapp.com/Mfl/standings/2020`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'Origin': 'http://localhost:3000'
             }
         })
             .then(res => {
                 let sorted = res.data.sort((a, b) => ((a.h2hWins1 * 5 + a.pointsFor1) + (a.h2hWins2 * 5 + a.pointsFor2) + (a.h2hWins3 * 5 + a.pointsFor3)) > ((b.h2hWins1 * 5 + b.pointsFor1) + (b.h2hWins2 * 5 + b.pointsFor2) + (b.h2hWins3 * 5 + b.pointsFor3)) ? -1 : 1 );
                 this.setState({ standings: sorted })
-                console.log(this.state.sorted);
             });
     }
 
@@ -89,6 +95,12 @@ class TriTable extends React.Component {
             </div>
         )
     }
+}
+TriTable.propTypes = {
+    ownerList: PropTypes.array.isRequired,
+    loadOwners: PropTypes.func.isRequired,
+    selectedTeam: PropTypes.object.isRequired,
+    selectTeam: PropTypes.func.isRequired
 }
 
 export default connect(function mapStateToProps(state, props){
