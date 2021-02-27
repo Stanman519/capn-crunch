@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import * as ownerActions from '../redux/actions/ownerActions.js';
 import * as teamActions from '../redux/actions/teamActions.js';
-import stickyHeader from '@material-ui/data-grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import '../styles/DeadCapTable.scss';
 import PropTypes from 'prop-types';
 
@@ -18,10 +18,12 @@ class DeadCapTable extends React.Component{
     constructor(props){
         super(props);
             this.state = {
-            ownerList: [],
-            selectedTeam: {}
+                ownerList: [],
+                selectedTeam: {},
+                isLoading: true,
+                content: ''
+            }
     }
-}
 
     componentDidMount(){
         axios.get(`https://mfl-capn.herokuapp.com/Mfl/deadCapInfo`, {
@@ -31,15 +33,12 @@ class DeadCapTable extends React.Component{
             }
         })
             .then(res => {
-                console.log("res.data", res.data)
                 this.props.loadOwners(res.data)
             })
             .then(() => {
-                console.log("ownerList", this.props.ownerList);
-                console.log("first index of owners is", this.props.ownerList[0])
-                this.props.selectTeam(this.props.ownerList[0]);
-                console.log("auto selected team is ", this.props.selectedTeam);
+                setTimeout(this.props.selectTeam(this.props.ownerList[0]), 1000);
             })
+            .then(content => this.setState({ content: content, isLoading : false }))
     };
     pickTeam = franchise => {
         this.props.selectTeam(franchise)
@@ -47,9 +46,9 @@ class DeadCapTable extends React.Component{
     };
 
     render(){
-        return (
-            <div>
-                <h1 class="title"> Dead Cap Tracker </h1>
+        let content = <CircularProgress />;
+        if (!this.state.isLoading) {
+            content = (
                 <TableContainer class="scroll" >
                     <Table size="small" class="table">
                         <TableHead>
@@ -78,6 +77,15 @@ class DeadCapTable extends React.Component{
                         </TableBody>
                     </Table>
                 </TableContainer>
+            )
+        }
+
+        return (
+            <div>
+                <h1 class="title"> Dead Cap Tracker </h1>
+                <div>
+                    {content}
+                </div>
             </div>
         );
     }

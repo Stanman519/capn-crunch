@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-
+import { DataGrid } from '@material-ui/data-grid';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,19 +9,18 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 const columns = [
-    { field: 'name', headerName: 'Name'},
+    { field: 'name', headerName: 'Name', width: 300},
     { field: 'team', headerName: 'Team'},
     { field: 'position', headerName: 'Positon' },
     { field: 'age', headerName: 'Age'},
-    { field: 'salary', headerName: 'Current Salary'},
+    { field: 'salary', headerName: 'Current Salary', width: 200},
 ]
 
 
 class ImpendingFreeAgents extends React.Component {
 
     state = {
-        players: [],
-
+        players: []
     }
 
 
@@ -33,16 +32,15 @@ class ImpendingFreeAgents extends React.Component {
             }
         })
             .then(res => {
-                this.setState({ players: res.data });
+                this.setState({ players: res.data })
             })
     }
 
-
     render() {
         return (
-            <TableContainer>
-                <Table size="small" columns={columns}>
-                    <TableHead>
+            <div style={{ height: "100vh", width: 800, display: "flex", justifyContent: "center"}}>
+                <DataGrid size="small" columns={columns} rows={this.state.players}>
+                    {/* <TableHead>
                         <TableRow>
                             <TableCell></TableCell>
                             <TableCell>Team</TableCell>
@@ -61,9 +59,9 @@ class ImpendingFreeAgents extends React.Component {
                                 <TableCell>${parseInt(row.salary) ?? row.salary}</TableCell>
                             </TableRow>
                         ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                    </TableBody> */}
+                </DataGrid>
+            </div>
         );
     }
 }

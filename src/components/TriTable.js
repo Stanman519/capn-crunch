@@ -14,15 +14,7 @@ class TriTable extends React.Component {
     state = {
         standings: [],
         ownerList: [],
-
     } 
-    // componentWillUnmount() {
-    //     // fix Warning: Can't perform a React state update on an unmounted component
-    //     this.setState = (state,callback)=>{
-    //         return;
-    //     };
-    // }
-
     componentDidMount() {
         axios.get(`https://mfl-capn.herokuapp.com/Mfl/standings/2020`, {
             headers: {
@@ -75,7 +67,8 @@ class TriTable extends React.Component {
                             <TableRow class="horizontal" key={row.franchiseId}>
                                 <TableCell class="team-text">
                                     {this.props.ownerList.find(o => o.franchiseId === row.franchiseId).team} 
-                                    <p class="total">{(row.h2hWins1 * 5 + row.pointsFor1) + (row.h2hWins2 * 5 + row.pointsFor2) + (row.h2hWins3 * 5 + row.pointsFor3)} total points</p>
+                                    <p class="total">{(row.h2hWins1 * 5 + row.pointsFor1) + (row.h2hWins2 * 5 + row.pointsFor2)
+                                     + (row.h2hWins3 * 5 + row.pointsFor3)} total points</p>
                                 
                                 </TableCell>
                                 <TableCell class="tritable-text">{row.h2hWins1 ?? 0}</TableCell>
