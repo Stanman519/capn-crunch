@@ -35,14 +35,16 @@ class DeadCapTable extends React.Component{
             .then(res => {
                 this.props.loadOwners(res.data)
             })
-            .then(() => {
-                setTimeout(this.props.selectTeam(this.props.ownerList[0]), 1000);
+            .then(content => {
+                this.setState({ content: content, isLoading : false });
+                setTimeout(() => {
+                    this.props.selectTeam(this.props.ownerList[0])
+                }, 1500);
             })
-            .then(content => this.setState({ content: content, isLoading : false }))
+
     };
     pickTeam = franchise => {
         this.props.selectTeam(franchise)
-        setTimeout(() => {console.log("manually selected team is ", this.props.selectedTeam)}, 2000);
     };
 
     render(){

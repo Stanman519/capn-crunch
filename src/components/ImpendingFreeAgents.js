@@ -40,26 +40,6 @@ class ImpendingFreeAgents extends React.Component {
         return (
             <div style={{ height: "100vh", width: 800, display: "flex", justifyContent: "center"}}>
                 <DataGrid size="small" columns={columns} rows={this.state.players}>
-                    {/* <TableHead>
-                        <TableRow>
-                            <TableCell></TableCell>
-                            <TableCell>Team</TableCell>
-                            <TableCell>Position</TableCell>
-                            <TableCell>Age</TableCell>
-                            <TableCell>Salary</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.state.players.map((row) => (
-                            <TableRow key={row.id}>
-                                <TableCell>{row.name}</TableCell>
-                                <TableCell>{row.team}</TableCell>
-                                <TableCell>{row.position}</TableCell>
-                                <TableCell>{row.age}</TableCell>
-                                <TableCell>${parseInt(row.salary) ?? row.salary}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody> */}
                 </DataGrid>
             </div>
         );

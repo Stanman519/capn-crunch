@@ -34,14 +34,10 @@ class CapDetails extends React.Component {
         })
             .then(res => {
                 this.props.loadTransactions(res.data)
-                console.log("trans", this.props.transactions)
             })
     }  
     componentDidUpdate(prevProps){
         if(this.props.selectedTeam.team !== prevProps.selectedTeam.team){
-
-            console.log("hey the team changed")
-
             this.setState({playersOnSelectedTeam20: this.props.transactions.filter( 
             t => t.franchiseId == this.props.selectedTeam.franchiseId && 
             (t.yearOfTransaction + t.years) > 2020)});
@@ -77,7 +73,7 @@ class CapDetails extends React.Component {
                   {/* }  */}
                     <TableBody>
                         {this.state.playersOnSelectedTeam20.map((row) => (
-                            <TableRow key={this.props.transactions.transactionId}>
+                            <TableRow key={this.state.playersOnSelectedTeam20.transactionId}>
                                 <TableCell class="player-penalty-text">{row.playerName}</TableCell>
                                 <TableCell class="player-penalty-text">${row.amount}</TableCell>
                             </TableRow>
@@ -93,7 +89,7 @@ class CapDetails extends React.Component {
                     
                     <TableBody>
                         {this.state.playersOnSelectedTeam21.map((row) => (
-                            <TableRow key={this.props.transactions.transactionId}>
+                            <TableRow key={this.state.playersOnSelectedTeam21.transactionId}>
                                 <TableCell class="player-penalty-text">{row.playerName}</TableCell>
                                 <TableCell class="player-penalty-text">${row.amount}</TableCell>
                             </TableRow>
@@ -109,7 +105,7 @@ class CapDetails extends React.Component {
 
                     <TableBody>
                         {this.state.playersOnSelectedTeam22.map((row) => (
-                            <TableRow key={this.props.transactions.transactionId}>
+                            <TableRow key={this.state.playersOnSelectedTeam22.transactionId}>
                                 <TableCell class="player-penalty-text">{row.playerName}</TableCell>
                                 <TableCell class="player-penalty-text">${row.amount}</TableCell>
                             </TableRow>
@@ -125,7 +121,7 @@ class CapDetails extends React.Component {
 
                     <TableBody>
                         {this.state.playersOnSelectedTeam23.map((row) => (
-                            <TableRow key={this.props.transactions.transactionId}>
+                            <TableRow key={this.state.playersOnSelectedTeam23.transactionId}>
                                 <TableCell class="player-penalty-text">{row.playerName}</TableCell>
                                 <TableCell class="player-penalty-text">${row.amount}</TableCell>
                             </TableRow>
@@ -141,7 +137,7 @@ class CapDetails extends React.Component {
     
                     <TableBody>
                         {this.state.playersOnSelectedTeam24.map((row) => (
-                            <TableRow key={this.props.transactions.transactionId}>
+                            <TableRow key={this.state.playersOnSelectedTeam24.transactionId}>
                                 <TableCell class="player-penalty-text">{row.playerName}</TableCell>
                                 <TableCell class="player-penalty-text">${row.amount}</TableCell>
                             </TableRow>
