@@ -52,8 +52,8 @@ const HomeView = () => (
 )
 
 const FreeAgents = () => (
-  <Fragment>
-    <h1>Impending Free Agents</h1>
+  <Fragment style={{ display: "flex", flexDirection: 'row' }}>
+    <h1 style={{ justifyContent: "center" }}>Impending Free Agents</h1>
     <ImpendingFreeAgents />
   </Fragment>
 );

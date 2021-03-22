@@ -9,7 +9,11 @@ import configureStore from "./redux/configureStore";
 
 const initialState = {
   ownerList: [],
-  selectedTeam: {},
+  selectedTeam: {
+    // amount: [],
+    // franchiseId: 0,
+    // team: ''
+  },
   transactions: []
 }
 const store = configureStore(); 
