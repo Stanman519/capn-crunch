@@ -1,4 +1,4 @@
-import { createStore, compose } from 'redux';
+import { createStore } from 'redux';
 import rootReducer from './reducers/index.js';
 
 
@@ -10,31 +10,3 @@ export default function configureStore(initialState){
     );
 }
 
-// function updateStore(state = { ownerList: [], transactions: [], selectedTeam: {}}, action){
-//     if (action.type === 'LOAD_OWNERS'){
-//         return {
-//             ...state,
-//             ownerList: action.data
-//         }
-//     }
-//     if (action.type === 'LOAD_TRANSACTIONS'){
-//         return {
-//             ...state,
-//             transactions: action.data
-//         }
-//     }
-//     if (action.type === 'SELECT_TEAM'){
-//         return {
-//             ...state,
-//             selectedTeam: action.data
-//         }
-//     }
-//     return state
-// }
-
-
-
-
-// var store = createStore(updateStore);
-
-// export default store;

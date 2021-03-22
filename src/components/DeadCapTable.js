@@ -1,54 +1,46 @@
 import axios from 'axios';
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useState} from 'react';
+import { useSelector, useDispatch  } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import * as ownerActions from '../redux/actions/ownerActions.js';
-import * as teamActions from '../redux/actions/teamActions.js';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { loadOwners } from '../redux/actions/ownerActions.js';
+import { selectTeam } from '../redux/actions/teamActions.js';
+import { loadTransactions } from '../redux/actions/transactionActions.js';
 import '../styles/DeadCapTable.scss';
-import PropTypes from 'prop-types';
 
 
-class DeadCapTable extends React.Component{
-    constructor(props){
-        super(props);
-            this.state = {
-                ownerList: [],
-                selectedTeam: {},
-                isLoading: true,
-                content: ''
-            }
+export default function DeadCapTable() {
+    const selectedTeam = useSelector(state => state.selectedTeam?.selectedTeam);
+    const ownerList = useSelector(state => state.ownerList);
+    const [isLoading, setIsLoading] = useState(true);
+    const dispatch = useDispatch();
+    const handleClick = (row) => {
+        dispatch(selectTeam(row));
     }
-
-    componentDidMount(){
-        axios.get(`https://mfl-capn.herokuapp.com/Mfl/deadCapInfo`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        })
-            .then(res => {
-                this.props.loadOwners(res.data)
+    console.log("owners", ownerList)
+    //move to app level
+    useEffect(() => {
+        const fetchData = async () => {
+            axios.get(`https://mfl-capn.herokuapp.com/Mfl/deadCapInfo`)
+                .then(res => {
+                    dispatch(loadOwners(res.data))
+                    setTimeout(dispatch(selectTeam(res.data[0])), 6000)
             })
-            .then(() => {
-                setTimeout(this.props.selectTeam(this.props.ownerList[0]), 1000);
+            axios.get(`https://mfl-capn.herokuapp.com/Mfl/transactions/2020`)
+                .then(res => {
+                    dispatch(loadTransactions(res.data))
+                    setIsLoading(false)
             })
-            .then(content => this.setState({ content: content, isLoading : false }))
-    };
-    pickTeam = franchise => {
-        this.props.selectTeam(franchise)
-        setTimeout(() => {console.log("manually selected team is ", this.props.selectedTeam)}, 2000);
-    };
-
-    render(){
-        let content = <CircularProgress />;
-        if (!this.state.isLoading) {
-            content = (
+        }
+        fetchData() 
+      }, []);
+        if (!isLoading) {
+            return (
                 <TableContainer class="scroll" >
                     <Table size="small" class="table">
                         <TableHead>
@@ -62,10 +54,10 @@ class DeadCapTable extends React.Component{
                             </TableRow>
                         </TableHead>
                         <TableBody class="">
-                            {this.props.ownerList.map((row) => (
-                                <TableRow onClick={() => this.pickTeam(row)}
-                                    style={{ backgroundColor: this.props.selectedTeam.team === row.team ? '#420E97' : '#283142' }}
-                                    key={this.props.ownerList.franchiseId}>
+                            { ownerList.map((row) => (
+                                <TableRow onClick={() => handleClick(row)}
+                                    style={{ backgroundColor: selectedTeam?.team === row?.team ? '#420E97' : '#283142' }}
+                                    key={ownerList.franchiseId}>
                                     <TableCell class="table-text first">{row.team}</TableCell>
                                     <TableCell class="table-text">${row.amount[0] ?? 0}</TableCell>
                                     <TableCell class="table-text">${row.amount[1] ?? 0}</TableCell>
@@ -79,23 +71,23 @@ class DeadCapTable extends React.Component{
                 </TableContainer>
             )
         }
-
-        return (
-            <div>
-                <h1 class="title"> Dead Cap Tracker </h1>
+        else { 
+            return (
                 <div>
-                    {content}
+                    <h1 class="title"> Dead Cap Tracker </h1>
+                    <div>
+                        <CircularProgress/> 
+                    </div>
                 </div>
-            </div>
-        );
+            );
     }
 }
 
 DeadCapTable.propTypes = {
-    ownerList: PropTypes.array.isRequired,
-    loadOwners: PropTypes.func.isRequired,
-    selectedTeam: PropTypes.object.isRequired,
-    selectTeam: PropTypes.func.isRequired
+    // ownerList: PropTypes.array.isRequired,
+    // loadOwners: PropTypes.func.isRequired,
+    // selectedTeam: PropTypes.object.isRequired,
+    // selectTeam: PropTypes.func.isRequired
 }
 function mapStateToProps(state) {
     return {
@@ -106,11 +98,11 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        loadOwners: owner => dispatch(ownerActions.loadOwners(owner)),
-        selectTeam: team => dispatch(teamActions.selectTeam(team))
+        loadOwners: owner => dispatch(loadOwners(owner)),
+        selectTeam: team => dispatch(selectTeam(team))
         //actions: bindActionCreators(actions, dispatch)
     };
     //what actions do you want to expose as props (determines which actions instead of which state)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeadCapTable);
+//export default connect(mapStateToProps, mapDispatchToProps)(DeadCapTable);
