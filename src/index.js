@@ -4,8 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import store from "./configureStore";
 import "typeface-roboto";
+import configureStore from "./redux/configureStore";
+
+const initialState = {
+  ownerList: [],
+  selectedTeam: {
+    // amount: [],
+    // franchiseId: 0,
+    // team: ''
+  },
+  transactions: []
+}
+const store = configureStore(); 
 
 ReactDOM.render(
   <Provider store={store}>
