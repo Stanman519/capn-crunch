@@ -27,16 +27,22 @@ export default function CapDetails() {
 
     useEffect(() => {
         if (selectedTeam == null) { return; }
+        console.log(transactions.filter(t => t.franchiseId === selectedTeam.franchiseId))
             setplayersOnSelectedTeam20(transactions.filter(t =>
-                t.franchiseId === selectedTeam.franchiseId && (t.yearOfTransaction + t.years) > 2020));
+                t.franchiseId === selectedTeam.franchiseId && t.yearOfTransaction <= 2020 &&
+                (t.yearOfTransaction + t.years) > 2020));
             setplayersOnSelectedTeam21(transactions.filter(t =>
-                t.franchiseId === selectedTeam.franchiseId && (t.yearOfTransaction + t.years) > 2021));
+                t.franchiseId === selectedTeam.franchiseId && t.yearOfTransaction <= 2021 && 
+                (t.yearOfTransaction + t.years) > 2021));
             setplayersOnSelectedTeam22(transactions.filter(t =>
-                t.franchiseId === selectedTeam.franchiseId && (t.yearOfTransaction + t.years) > 2022));
+                t.franchiseId === selectedTeam.franchiseId && t.yearOfTransaction <= 2022 &&
+                (t.yearOfTransaction + t.years) > 2022));
             setplayersOnSelectedTeam23(transactions.filter(t =>
-                t.franchiseId === selectedTeam.franchiseId && (t.yearOfTransaction + t.years) > 2023));
+                t.franchiseId === selectedTeam.franchiseId && t.yearOfTransaction <= 2023 &&
+                (t.yearOfTransaction + t.years) > 2023));
             setplayersOnSelectedTeam24(transactions.filter(t =>
-                t.franchiseId === selectedTeam.franchiseId && (t.yearOfTransaction + t.years) > 2024));
+                t.franchiseId === selectedTeam.franchiseId && t.yearOfTransaction <= 2024 &&
+                (t.yearOfTransaction + t.years) > 2024));
 
     }, [selectedTeam]);
 

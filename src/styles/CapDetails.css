@@ -6,6 +6,9 @@
 .details-table{
     margin-left: 35px;
     margin-right: 35px;
+    height: 60vh;     
+    overflow-y: auto;    
+    overflow-x: hidden;
 
 }
 .player-penalty-text{

@@ -31,7 +31,7 @@ export default function DeadCapTable() {
                     dispatch(loadOwners(res.data))
                     setTimeout(dispatch(selectTeam(res.data[0])), 6000)
             })
-            axios.get(`https://mfl-capn.herokuapp.com/Mfl/transactions/2020`)
+            axios.get(`https://mfl-capn.herokuapp.com/Mfl/allTransactions`)
                 .then(res => {
                     dispatch(loadTransactions(res.data))
                     setIsLoading(false)
@@ -41,34 +41,37 @@ export default function DeadCapTable() {
       }, []);
         if (!isLoading) {
             return (
-                <TableContainer class="scroll" >
-                    <Table size="small" class="table">
-                        <TableHead>
-                            <TableRow class="table-text" style={{ paddingBottom: 200 }}>
-                                <TableCell class="table-text">Team</TableCell>
-                                <TableCell class="table-text">2020</TableCell>
-                                <TableCell class="table-text">2021</TableCell>
-                                <TableCell class="table-text">2022</TableCell>
-                                <TableCell class="table-text">2023</TableCell>
-                                <TableCell class="table-text">2024</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody class="">
-                            { ownerList.map((row) => (
-                                <TableRow onClick={() => handleClick(row)}
-                                    style={{ backgroundColor: selectedTeam?.team === row?.team ? '#420E97' : '#283142' }}
-                                    key={ownerList.franchiseId}>
-                                    <TableCell class="table-text first">{row.team}</TableCell>
-                                    <TableCell class="table-text">${row.amount[0] ?? 0}</TableCell>
-                                    <TableCell class="table-text">${row.amount[1] ?? 0}</TableCell>
-                                    <TableCell class="table-text">${row.amount[2] ?? 0}</TableCell>
-                                    <TableCell class="table-text">${row.amount[3] ?? 0}</TableCell>
-                                    <TableCell class="table-text last">${row.amount[4] ?? 0}</TableCell>
+                <div>
+                    <h1 class="title"> Dead Cap Tracker </h1>
+                    <TableContainer class="scroll" >
+                        <Table size="small" class="table">
+                            <TableHead>
+                                <TableRow class="table-text" style={{ paddingBottom: 200 }}>
+                                    <TableCell class="table-text">Team</TableCell>
+                                    <TableCell class="table-text">2020</TableCell>
+                                    <TableCell class="table-text">2021</TableCell>
+                                    <TableCell class="table-text">2022</TableCell>
+                                    <TableCell class="table-text">2023</TableCell>
+                                    <TableCell class="table-text">2024</TableCell>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                            </TableHead>
+                            <TableBody class="">
+                                { ownerList.map((row) => (
+                                    <TableRow onClick={() => handleClick(row)}
+                                        style={{ backgroundColor: selectedTeam?.team === row?.team ? '#420E97' : '#283142' }}
+                                        key={ownerList.franchiseId}>
+                                        <TableCell class="table-text first">{row.team}</TableCell>
+                                        <TableCell class="table-text">${row.amount[0] ?? 0}</TableCell>
+                                        <TableCell class="table-text">${row.amount[1] ?? 0}</TableCell>
+                                        <TableCell class="table-text">${row.amount[2] ?? 0}</TableCell>
+                                        <TableCell class="table-text">${row.amount[3] ?? 0}</TableCell>
+                                        <TableCell class="table-text last">${row.amount[4] ?? 0}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </div>
             )
         }
         else { 
