@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import '../styles/TriTable.scss';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function TriTable() {
     const ownerList = useSelector(state => state.ownerList);
@@ -80,7 +81,13 @@ export default function TriTable() {
                     </Table>
                 </TableContainer>
             </div>
-        )
+        );
+    } else {
+        return (
+            <div>
+                <circularProgress/>
+            </div>
+            );
     }
 }
 TriTable.propTypes = {
