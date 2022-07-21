@@ -8,7 +8,8 @@
 }
 .left-side{
   width: 65%;
-  margin-left: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 .background{
   background-color: #121d2e;
@@ -19,9 +20,9 @@
 }
 .right-side{
   margin-top: 40px;
-  margin-right: 40px;
-  width: 35%;
-  height: 60vh;
+  margin-right: 400px;
+  padding-right: 100px;
+  width: 500px;
 }
 .nav-button{
   color: #AFBDD1;
@@ -33,4 +34,8 @@
 }
 .tri-table{
   height: 40vh;
+  margin-right: 200px;
+}
+.cap-details{
+  padding-right: 100px;
 }

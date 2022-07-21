@@ -19,7 +19,7 @@ class ImpendingFreeAgents extends React.Component {
 
 
     componentDidMount() {
-        axios.get(`https://mfl-capn.herokuapp.com/Mfl/impendingFreeAgents/2020`, {
+        axios.get(`https://mfl-capn.herokuapp.com/Mfl/impendingFreeAgents/2021`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
